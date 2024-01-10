@@ -10,11 +10,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.Configure<OpeningTimeOption>(builder.Configuration.GetSection("OpeningTime"));
 
+builder.Services.AddScoped<ExampleClass>(e => new ExampleClass { Name = "Initial stage" });
+
 var app = builder.Build();
-
-//var openingTimeSection = app.Configuration.GetSection("OpeningTime");
-//var openingTimeOptions = openingTimeSection.Get<OpeningTimeOption>();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
