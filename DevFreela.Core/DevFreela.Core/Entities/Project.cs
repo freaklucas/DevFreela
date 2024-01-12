@@ -21,11 +21,19 @@ public class Project : BaseEntity
     public string Description { get; private set; }
     public int IdClient { get; private set; }
     public int IdFreelancer { get; private set; }
-    public decimal? TotalCost { get; private set; }
+    public decimal TotalCost { get; private set; }
     public DateTime CreatedAt { get; private set; }
-    public DateTime? StartedAt { get; private set; }
+    public DateTime StartedAt { get; private set; }
     public DateTime? FinishAt { get; private set; }
     public ProjectStatusEnum Status { get; private set; }
+
+    public void Cancel()
+    {
+        if (Status == ProjectStatusEnum.InProgress || Status == ProjectStatusEnum.Suspended)
+        {
+            Status = ProjectStatusEnum.Cancelled;
+        }
+    }
 
     public List<ProjectComment> Comments { get; private set; }
 }
