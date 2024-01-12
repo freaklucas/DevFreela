@@ -23,8 +23,16 @@ public class DevFreelaDbContext
             new Skill("Descrição do projeto 1 - .Net core - C#"),
             new Skill("Descrição do projeto 2 - Javascript - Vue.js")
         };
+
+        ProjectComments = new List<ProjectComment>
+        {
+            new ProjectComment("Conteudo 1", 1, 2),
+            new ProjectComment("Conteudo 2", 2, 3)
+
+        };
     }
     public List<Project> Projects { get; private set; }
     public List<User> Users { get; private set; }
     public List<Skill> Skills { get; private set; }
+    public List<ProjectComment> ProjectComments { get; private set; }
 }
