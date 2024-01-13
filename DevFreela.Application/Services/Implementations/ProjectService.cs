@@ -9,10 +9,12 @@ namespace DevFreela.Application.Services.Implementations;
 public class ProjectService : IProjectService
 {
     private readonly DevFreelaDbContext _dbContext;
+
     public ProjectService(DevFreelaDbContext dbContext)
     {
         _dbContext = dbContext;
     }
+
     public List<ProjectViewModel> GetAll(string query)
     {
         var projects = _dbContext.Projects;
@@ -28,13 +30,13 @@ public class ProjectService : IProjectService
         var project = _dbContext.Projects.SingleOrDefault(p => p.Id == id);
 
         var projectDetailsViewModel = new ProjectDetailsViewModel(
-                    project.Id,
-                    project.Title,
-                    project.Description,
-                    project.TotalCost,
-                    project.StartedAt,
-                    project.FinishedAt
-                );
+            project.Id,
+            project.Title,
+            project.Description,
+            project.TotalCost,
+            project.StartedAt,
+            project.FinishedAt
+        );
 
         return projectDetailsViewModel;
     }
@@ -42,12 +44,12 @@ public class ProjectService : IProjectService
     public int Create(NewProjectInputModel inputModel)
     {
         var project = new Project(
-            inputModel.Title, 
-            inputModel.Description, 
-            inputModel.IdClient, 
-            inputModel.IdFreelancer, 
+            inputModel.Title,
+            inputModel.Description,
+            inputModel.IdClient,
+            inputModel.IdFreelancer,
             inputModel.TotalCost
-            );
+        );
 
         _dbContext.Projects.Add(project);
 
@@ -67,7 +69,9 @@ public class ProjectService : IProjectService
 
     public void Update(UpdateProjectInputModel inputModel)
     {
-        throw new NotImplementedException();
+        var project = _dbContext.Projects.FirstOrDefault(p => p.Id == inputModel.Id);
+
+        project.Update(inputModel.Title, inputModel.Description, inputModel.TotalCost);
     }
 
     public void Delete(int id)
@@ -79,11 +83,15 @@ public class ProjectService : IProjectService
 
     public void Start(int id)
     {
-        throw new NotImplementedException();
+        var project = _dbContext.Projects.FirstOrDefault(x => x.Id == id);
+
+        project.Start();
     }
 
     public void Finish(int id)
     {
-        throw new NotImplementedException();
+        var project = _dbContext.Projects.FirstOrDefault(x => x.Id == id);
+
+        project.Finished();
     }
 }
