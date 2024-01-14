@@ -1,4 +1,5 @@
 ﻿using DevFreela.API.Models;
+using DevFreela.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -9,16 +10,18 @@ namespace DevFreela.API.Controllers;
 
 public class ProjectsController : ControllerBase
 {
-    private readonly OpeningTimeOption _openingTimeOption;
-    public ProjectsController(IOptions<OpeningTimeOption> option, ExampleClass exampleClass)
+    private readonly IProjectService _projectsService;
+    public ProjectsController(IProjectService projectService)
     {
-        exampleClass.Name = "Apdated at Projects Controller";
-        _openingTimeOption = option.Value;
+        _projectsService = projectService;
     }
+
     [HttpGet]
     public IActionResult Get(string query)
     {
-        return Ok();
+        var projects = _projectsService.GetAll(query);
+
+        return Ok(projects);
     }
 
     [HttpGet("{id}")]
