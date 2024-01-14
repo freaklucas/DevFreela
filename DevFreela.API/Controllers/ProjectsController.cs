@@ -1,4 +1,5 @@
 ﻿using DevFreela.API.Models;
+using DevFreela.Application.InputModels;
 using DevFreela.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -27,27 +28,38 @@ public class ProjectsController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
-        return Ok();
+        var project = _projectsService.GetById(id);
+
+        if (project == null)
+        {
+            return NotFound("Indentificador não encontrado.");
+        }
+
+        return Ok(project);
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] CreateProjectModel createProject)
+    public IActionResult Post([FromBody] NewProjectInputModel inputModel)
     {
-        if (createProject.Title.Length > 50)
+        if (inputModel.Title.Length > 50)
         {
             return BadRequest();
         }
 
+        _projectsService.Create(inputModel);
+        
         return Created();
     }
 
     [HttpPut("{id}")]
-    public IActionResult Put(int id, [FromBody] UpdateProjectModel updateProject)
+    public IActionResult Put(int id, [FromBody] UpdateProjectInputModel updateProject)
     {
         if (updateProject.Description.Length > 250)
         {
             return BadRequest();
         }
+
+        _projectsService.Update(updateProject);
 
         return NoContent();
     }
@@ -55,6 +67,8 @@ public class ProjectsController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
+        _projectsService.Delete(id);
+
         return NoContent();
     }
 

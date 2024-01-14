@@ -22,4 +22,3 @@ public class UpdateProjectInputModel
     public string Description { get; set; }
     public decimal TotalCost { get; set; }
 }
-
