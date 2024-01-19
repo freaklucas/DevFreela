@@ -27,6 +27,9 @@ public class Project : BaseEntity
     public DateTime? FinishedAt { get; private set; }
     public ProjectStatusEnum Status { get; private set; }
 
+    public User Client { get; set; }
+    public User Freelancer { get; set; }
+    
     public void Cancel()
     {
         if (Status == ProjectStatusEnum.InProgress || Status == ProjectStatusEnum.Suspended)
