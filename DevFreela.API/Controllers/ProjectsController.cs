@@ -73,20 +73,25 @@ public class ProjectsController : ControllerBase
     }
 
     [HttpPost("{id}/comments")]
-    public IActionResult PostComment(int id, [FromBody] CreateCommentModel createCommentModel)
+    public IActionResult PostComment(int id, [FromBody] CreateCommentInputModel createCommentModel)
     {
+        _projectsService.CreateComment(createCommentModel);
+
         return NoContent();
     }
 
     [HttpPut("{id}/start")]
     public IActionResult Start(int id)
     {
+        _projectsService.Start(id);
+
         return NoContent();
     }
 
     [HttpPut("{id}/finish")]
     public IActionResult Finish(int id)
     {
+        _projectsService.Finish(id);
         return NoContent();
     }
 }
