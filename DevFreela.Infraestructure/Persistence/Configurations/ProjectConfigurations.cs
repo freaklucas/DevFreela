@@ -11,6 +11,9 @@ public class ProjectConfigurations : IEntityTypeConfiguration<Project>
         builder
             .HasKey(p => p.Id);
 
+        builder.Property(p => p.TotalCost)
+            .HasColumnType("decimal(18,2)");
+
         builder
             .HasOne(p => p.Freelancer)
             .WithMany(f => f.FreelanceProjects)
