@@ -11,4 +11,8 @@
     <ProjectReference Include="..\DevFreela.Infraestructure\DevFreela.Infraestructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="InputModels\NewUserInputModel.cs" />
+  </ItemGroup>
+
 </Project>

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevFreela.Infraestructure.Persistence.Migrations
 {
     [DbContext(typeof(DevFreelaDbContext))]
-    [Migration("20240124025150_InitialMigration")]
+    [Migration("20240124215647_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
