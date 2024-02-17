@@ -15,13 +15,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 //builder.Services.ConfigureServices(builder.Configuration);
 
 builder.Services.Configure<OpeningTimeOption>(builder.Configuration.GetSection("OpeningTime"));
 
-var connection = builder.Configuration.GetConnectionString("DevFreelaCs");
-builder.Services.AddDbContext<DevFreelaDbContext>(options => options.UseSqlServer(connection));
+var connectionString = builder.Configuration.GetConnectionString("DevFreelaCs");
+builder.Services.AddDbContext<DevFreelaDbContext> (options => options.UseSqlServer(connectionString));
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IProjectService, ProjectService>();
 

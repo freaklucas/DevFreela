@@ -10,6 +10,7 @@ public class DevFreelaDbContext : DbContext
     {
         
     }
+    
     public DbSet<Project> Projects { get; private set; }
     public DbSet<User> Users { get; private set; }
     public DbSet<Skill> Skills { get; private set; }
