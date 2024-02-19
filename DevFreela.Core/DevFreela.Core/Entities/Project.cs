@@ -16,6 +16,13 @@ public class Project : BaseEntity
         
         Comments = new List<ProjectComment>();
     }
+
+    public Project(string title, string description, decimal totalCost)
+    {
+        Title = title;
+        Description = description;
+        TotalCost = totalCost;
+    }
     
     public string Title { get; private set; }
     public string Description { get; private set; }

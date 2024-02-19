@@ -59,7 +59,7 @@ public class ProjectsController : ControllerBase
             return BadRequest();
         }
 
-        _projectsService.Update(updateProject);
+        _projectsService.Update(id, updateProject);
 
         return NoContent();
     }

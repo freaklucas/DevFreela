@@ -79,14 +79,18 @@ public class ProjectService : IProjectService
         _dbContext.SaveChanges();
     }
 
-    public void Update(UpdateProjectInputModel inputModel)
+    public void Update(int id, UpdateProjectInputModel inputModel)
     {
-        var project = _dbContext.Projects.FirstOrDefault(p => p.Id == inputModel.Id);
+        var project = _dbContext.Projects.FirstOrDefault(p => p.Id == id);
+        if (project == null)
+        {
+            return;
+        }
 
         project.Update(inputModel.Title, inputModel.Description, inputModel.TotalCost);
         _dbContext.SaveChanges();
     }
-
+    
     public void Delete(int id)
     {
         var project = _dbContext.Projects.FirstOrDefault(x => x.Id == id);
