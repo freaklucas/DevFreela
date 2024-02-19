@@ -67,8 +67,14 @@ public class ProjectsController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
+        var existsId = _projectsService.GetById(id);
+        if (existsId == null)
+        {
+            return NotFound("Identificador não encontrado.");
+        }
+        
         _projectsService.Delete(id);
-
+        // TODO: verificar inclusao de status cancelado ao invés de remover.
         return NoContent();
     }
 

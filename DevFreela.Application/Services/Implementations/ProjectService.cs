@@ -93,9 +93,11 @@ public class ProjectService : IProjectService
     
     public void Delete(int id)
     {
-        var project = _dbContext.Projects.FirstOrDefault(x => x.Id == id);
+        var findProject = _dbContext.Projects.FirstOrDefault(x => x.Id == id);
 
-        project.Cancel();
+        findProject.Cancel();
+        
+        _dbContext.Remove(findProject);
         _dbContext.SaveChanges();
     }
 
