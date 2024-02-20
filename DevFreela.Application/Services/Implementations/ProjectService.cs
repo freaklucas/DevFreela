@@ -74,11 +74,23 @@ public class ProjectService : IProjectService
             inputModel.IdProject,
             inputModel.IdUser
         );
-
+        // TODO: SÓ FUNCIONA passando ID do projeto >= 6
         _dbContext.ProjectComments.Add(comment);
         _dbContext.SaveChanges();
     }
+    
+    // TODO: encontrar id do projeto
+    public List<ProjectComment> GetCreatedComments()
+    {
+        var findProject = _dbContext.ProjectComments;
 
+        var projectsViewModel = findProject
+            .Select(p => new ProjectComment(p.Content, p.IdProject, p.IdUser))
+            .ToList();
+
+        return projectsViewModel;
+    }
+    
     public void Update(int id, UpdateProjectInputModel inputModel)
     {
         var project = _dbContext.Projects.FirstOrDefault(p => p.Id == id);
@@ -100,7 +112,6 @@ public class ProjectService : IProjectService
         _dbContext.Remove(findProject);
         _dbContext.SaveChanges();
     }
-
     public void Start(int id)
     {
         var project = _dbContext.Projects.FirstOrDefault(x => x.Id == id);

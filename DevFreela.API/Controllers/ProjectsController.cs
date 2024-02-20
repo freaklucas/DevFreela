@@ -38,6 +38,19 @@ public class ProjectsController : ControllerBase
         return Ok(project);
     }
 
+    [HttpGet("GetAllComments")]
+    public IActionResult GetCreatedComments()
+    {
+        var comments = _projectsService.GetCreatedComments();
+
+        if (comments == null)
+        {
+            return NotFound("Comentários não encontrado.");
+        }
+
+        return Ok(comments);
+    }
+
     [HttpPost]
     public IActionResult Post([FromBody] NewProjectInputModel inputModel)
     {
