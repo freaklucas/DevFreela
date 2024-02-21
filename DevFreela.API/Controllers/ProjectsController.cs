@@ -72,6 +72,11 @@ public class ProjectsController : ControllerBase
             return BadRequest();
         }
 
+        var verifyProject = _projectsService.GetById(id);
+        if (verifyProject == null)
+        {
+            return BadRequest("Identificador não encontrado.");
+        }
         _projectsService.Update(id, updateProject);
 
         return NoContent();
